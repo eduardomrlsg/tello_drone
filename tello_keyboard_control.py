@@ -1,4 +1,3 @@
-import cv2
 import pygame
 from djitellopy import Tello
 from time import sleep
@@ -20,10 +19,12 @@ def getKey(keyName):
     for eve in pygame.event.get(): pass
     keyInput = pygame.key.get_pressed()
     myKey = getattr(pygame, "K_{}".format(keyName)) #To have a format of K_{LEFT, RIGHT, UP, DOWN}
+    print('K_{}'.format(keyName))
+    
     if keyInput[myKey]:
         ans = True
-        pygame.display.update()
-
+    
+    pygame.display.update()
     return ans
 
 def getKeyboardInput():
@@ -41,8 +42,8 @@ def getKeyboardInput():
     if getKey("a"): yv = speed
     elif getKey("d"): yv = -speed
 
-    if getKey("q"): tello.land()
-    if getKey("e"): tello.takeoff(); sleep(3) # Sleep to ensure the drone has time to take off before accepting new commands
+    if getKey("q"): tello.land(); sleep(3) 
+    if getKey("e"): tello.takeoff()
 
     return [lr, fb, ud, yv]
 
